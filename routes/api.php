@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
 
 
 /*
@@ -20,13 +19,3 @@ Route::get("/test", function(){
     return "Test";
 });
 
-// Route::controller(AuthController::class)->group(function () {
-//     Route::post('login', 'login');
-//     Route::post('register', 'register');
-//     Route::post('logout', 'logout');
-//     Route::post('refresh', 'refresh');
-// });
-
-Route::get('/login',function(){
-    return ('Login Fail !!!');
-})->name('login');
