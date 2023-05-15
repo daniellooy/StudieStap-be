@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\subs;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class SubsController extends Controller
      */
     public function index()
     {
-        //
+        $subs = DB::table("subs")->get();
+        return response()->json($subs);
     }
 
     /**

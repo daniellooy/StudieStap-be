@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use DB;
 use App\Models\achievements;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,8 @@ class AchievementsController extends Controller
      */
     public function index()
     {
-        //
+        $achievements = DB::table("achievements")->get();
+        return response()->json($achievements);
     }
 
     /**
