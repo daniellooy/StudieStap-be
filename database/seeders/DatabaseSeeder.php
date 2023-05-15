@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File as FileFacade;
 
 class DatabaseSeeder extends Seeder
 {
@@ -17,7 +18,12 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory()->create([
             'firstname' => 'Peter',
             'lastname' => 'van Rijn',
-            'email' => 'peter@hotmail.nl',
+            'date_of_birth' => '1998-11-06',
+            'email' => 'petervanrijn@hotmail.nl',
+            'image' => 'images/profile.jpg',
+            'password'=> bcrypt('password'),
         ]);
+        $image = FileFacade::files(public_path('images'));
+
     }
 }
