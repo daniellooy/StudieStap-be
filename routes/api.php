@@ -18,6 +18,15 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get("/modules", [\App\Http\Controllers\ModuleController::class, 'index']);
+
+Route::get("/video/{id}", [\App\Http\Controllers\VideoController::class, 'getVideoById']);
+
+Route::get("/module/{id}", [\App\Http\Controllers\ModuleController::class, 'getModuleVideos']);
+
+Route::put("/module/edit", [\App\Http\Controllers\ModuleController::class, 'editModule']);
+
+Route::delete("/module/delete", [\App\Http\Controllers\ModuleController::class, 'deleteModule']);
 
 Route::get("/test", function(){
     return "Test";
