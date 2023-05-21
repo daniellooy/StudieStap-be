@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Module;
+use PhpParser\Node\Expr\AssignOp\Mod;
 
 class ModuleController extends Controller
 {
@@ -27,6 +28,19 @@ class ModuleController extends Controller
         $module->save();
 
         return response($request);
+    }
+
+    public function addModule(Request $request){
+        $file = $request->file('thumbnail');
+        if(!empty($file)){
+            $path = $file->store('video_thumbnails');
+        }
+        $module = new Module([
+            'title' => $request->title,
+            'description' => $request->description,
+            'thumbnail' => '/' . $path,
+        ]);
+        $module->save();
     }
 
     public function deleteModule(Request $request){

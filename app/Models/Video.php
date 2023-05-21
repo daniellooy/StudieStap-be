@@ -10,6 +10,8 @@ class Video extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['title','description','thumbnail','file_path','module_id'];
+
     public function module(): BelongsTo {
         return $this->belongsTo(Module::class);
     }
