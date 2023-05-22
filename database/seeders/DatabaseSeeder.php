@@ -26,8 +26,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             WorkshopSeeder::class,
+<<<<<<< HEAD
             AchievementSeeder::class,
             SubSeeder::class,
+=======
+            ModuleSeeder::class,
+>>>>>>> Joey
         ]);
         $image = FileFacade::files(public_path('images'));
 
