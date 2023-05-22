@@ -13,8 +13,7 @@ return new class extends Migration
     {
         Schema::create('messages', function (Blueprint $table) {
             $table->id();
-            $table->string('type');
-            $table->string('content')->nullable();
+            $table->text('message')->nullable();
             $table->unsignedBigInteger('channel_id');
             $table->unsignedBigInteger('user_channel_id');
             $table->foreign('user_channel_id')->references('id')->on('user_channels')->onDelete('cascade');

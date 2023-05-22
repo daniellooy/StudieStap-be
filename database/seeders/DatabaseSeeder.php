@@ -2,10 +2,11 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File as FileFacade;
-
+use App\Models\Channel;
+use App\Models\User;
+use App\Models\UserChannel;
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -30,6 +31,19 @@ class DatabaseSeeder extends Seeder
             SubSeeder::class,
             ModuleSeeder::class,
         ]);
+        // make channels
+        $channels = Channel::factory()->count(3)->create();
+        foreach ($channels as $channel) {
+            foreach (User::all() as $user) {
+              UserChannel::factory()->create([
+                    'user_id' => $user->id,
+                    'channel_id' => $channel->id,
+                ]);
+            }
+        }
+
+
+        // UserChannel::factory()->count(10)->create();
         $image = FileFacade::files(public_path('images'));
 
     }

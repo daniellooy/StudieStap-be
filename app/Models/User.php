@@ -49,4 +49,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+
+    public function channel() {
+        return $this->hasMany(User_Channel::class);
+    }
+
+    
 }

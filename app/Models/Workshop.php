@@ -9,8 +9,5 @@ class Workshop extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'subject',
-        'content_path',
-    ];
+ 
 }
