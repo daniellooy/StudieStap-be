@@ -16,4 +16,20 @@ class ExampleTest extends TestCase
 
         $response->assertStatus(200);
     }
+    
+    // create a test for the user show route
+    public function test_the_user_show_route_returns_a_successful_response()
+    {
+        // make a assertion that the user show route returns a successful response
+
+        $this->json('GET', '/api/user/1')
+            ->assertStatus(200);
+    }
+
+    // create a test for the user update route
+    public function test_the_user_update_route_returns_a_successful_response()
+    {
+        $this->json('PUT', '/api/user', ['id' => 1])
+            ->assertStatus(200);
+    }
 }

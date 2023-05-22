@@ -1,7 +1,11 @@
 <?php
 
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AchievementsController;
+use App\Http\Controllers\SubsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+
 Route::get("/modules", [\App\Http\Controllers\ModuleController::class, 'index']);
 Route::get("/videos", [\App\Http\Controllers\VideoController::class, 'index']);
 Route::get("/video/{id}", [\App\Http\Controllers\VideoController::class, 'getVideoById']);
@@ -30,7 +35,14 @@ Route::delete("/module/delete", [\App\Http\Controllers\ModuleController::class, 
 Route::put("/video/edit", [\App\Http\Controllers\VideoController::class, 'editVideo']);
 Route::post("/video/add", [\App\Http\Controllers\VideoController::class, 'addVideo']);
 Route::delete("/video/delete", [\App\Http\Controllers\VideoController::class, 'deleteVideo']);
+=======
+// route for updating the users information
+Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
+
 
 Route::get("/test", function(){
     return "Test";
 });
+
+Route::get('/achievements', [AchievementsController::class, 'index']);
+Route::get('/subs', [SubsController::class, 'index']);
