@@ -23,6 +23,12 @@ class DatabaseSeeder extends Seeder
             'image' => 'images/profile.jpg',
             'password'=> bcrypt('password'),
         ]);
+        $this->call([
+            UserSeeder::class,
+            WorkshopSeeder::class,
+            AchievementSeeder::class,
+            SubSeeder::class,
+        ]);
         $image = FileFacade::files(public_path('images'));
 
     }
