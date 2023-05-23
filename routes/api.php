@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AchievementsController;
+use App\Http\Controllers\ChannelController;
 use App\Http\Controllers\SubsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +25,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // route for updating the users information
 Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
+Route::middleware('auth:sanctum')->get('/channels',[ChannelController::class, 'index']);
 
 Route::get("/modules", [\App\Http\Controllers\ModuleController::class, 'index']);
 Route::get("/videos", [\App\Http\Controllers\VideoController::class, 'index']);

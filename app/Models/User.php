@@ -51,8 +51,6 @@ class User extends Authenticatable
 
 
     public function channel() {
-        return $this->hasMany(User_Channel::class);
+        return $this->hasMany(UserChannel::class);
     }
-
-    
 }

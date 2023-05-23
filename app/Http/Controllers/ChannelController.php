@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\channel;
+use App\Models\Channel;
 use Illuminate\Http\Request;
 
 class ChannelController extends Controller
@@ -12,7 +12,8 @@ class ChannelController extends Controller
      */
     public function index()
     {
-        //
+        // return all channels
+        return auth()->user()->channel;
     }
 
     /**

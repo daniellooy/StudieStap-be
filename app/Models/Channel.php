@@ -14,4 +14,8 @@ class Channel extends Model
         'image_path',
         'description',
     ];
+
+    public function user() {
+        return $this->hasMany(UserChannel::class);
+    }
 }

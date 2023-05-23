@@ -12,7 +12,8 @@ class MessageController extends Controller
      */
     public function index()
     {
-        //
+        // return all messages
+        return auth()->user()->channel->messages;
     }
 
     /**

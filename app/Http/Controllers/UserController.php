@@ -24,11 +24,17 @@ class UserController extends Controller
     {
 
         $user = User::findOrFail($request->id);
+        $profile_image = $request->file('profile_image');
         
+        if(!empty($profile_image)){
+            $path = $profile_image = $request->file('profile_image')->storeAs('images', $request->file('profile_image')->getClientOriginalName());
+        }
+
+
         $user->update([
             'firstname' => $request->first_name,
             'lastname' => $request->last_name,
-            'image' => $request->profile_image,
+            'image' => $path,
             'bio' => $request->biography,
             'phone' => $request->phone,
             'workshop' => $request->workshop,
@@ -38,6 +44,7 @@ class UserController extends Controller
             'zip' => $request->zip,
             'email' => $request->email,
         ]);
+        $user->save();
         // update the fields of the users that are different from the request
         
         return $user;
