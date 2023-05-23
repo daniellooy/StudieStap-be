@@ -21,7 +21,6 @@ return new class extends Migration
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
             $table->foreign('user_channel_id')->references('id')->on('user_channels')->onDelete('cascade');
             $table->foreign('response_to_id')->references('id')->on('messages')->onDelete('cascade');
-
             $table->timestamps();
         });
     }

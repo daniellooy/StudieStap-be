@@ -31,6 +31,7 @@ Route::middleware('auth:sanctum')->get('/channels',[UserChannelController::class
 // route for getting a channel
 Route::middleware('auth:sanctum')->get('/channel/{id}',[UserChannelController::class, 'show']);
 Route::middleware('auth:sanctum')->get('/channel/{id}/messages',[MessageController::class, 'index']);
+Route::middleware('auth:sanctum')->post('/channel/{id}/messages',[MessageController::class, 'create']);
 
 Route::get("/modules", [\App\Http\Controllers\ModuleController::class, 'index']);
 Route::get("/videos", [\App\Http\Controllers\VideoController::class, 'index']);

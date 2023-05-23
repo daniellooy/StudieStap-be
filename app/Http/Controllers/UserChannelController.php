@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\UserChannel;
+use App\Models\Channel;
 use Illuminate\Http\Request;
 
 class UserChannelController extends Controller
@@ -42,9 +43,9 @@ class UserChannelController extends Controller
     public function show(String $id)
     {
         // return a channel by id
-        $channel =  UserChannel::where('channel_id',$id)->get();
-        $messages = $channel;
-        return [ $channel, $messages];
+
+        $channel = Channel::where('id', $id)->with('messages')->first();
+        return $channel;
         
     }
 

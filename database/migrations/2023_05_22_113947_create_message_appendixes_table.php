@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('appendix_path');
             $table->timestamps();
 
-            
             $table->foreign('message_id')->references('id')->on('messages')->onDelete('cascade');
         });
     }
