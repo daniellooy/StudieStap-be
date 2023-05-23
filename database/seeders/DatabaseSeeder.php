@@ -44,13 +44,11 @@ class DatabaseSeeder extends Seeder
                     'user_channel_id' => $userChannel->user_id,
                     'channel_id' => $userChannel->channel_id,
                 ]);
-                
             }
         }
 
 
         // UserChannel::factory()->count(10)->create();
-        $image = FileFacade::files(public_path('images'));
 
     }
 }

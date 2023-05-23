@@ -24,19 +24,22 @@ class UserController extends Controller
     {
 
         $user = User::findOrFail($request->id);
-        $profile_image = $request->file('profile_image');
+        $profile_image = $request->file('profile_image_file');
         
         if(!empty($profile_image)){
-            $path = $profile_image = $request->file('profile_image')->storeAs('images', $request->file('profile_image')->getClientOriginalName());
+            $filename = $request->file('profile_image_file')->getClientOriginalName(); 
+            $file = $request->file('profile_image_file')->storeAs('images', $filename);
+
+            $user->save();
         }
 
 
         $user->update([
             'firstname' => $request->first_name,
             'lastname' => $request->last_name,
-            'image' => $path,
             'bio' => $request->biography,
             'phone' => $request->phone,
+            'image' => $file,
             'workshop' => $request->workshop,
             'city' => $request->city,
             'street' => $request->street,

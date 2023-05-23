@@ -10,7 +10,7 @@ class UserChannel extends Model
     use HasFactory;
 
     public function channel() {
-        return $this->belongsTo(channel::class);
+        return $this->belongsTo(Channel::class);
     }
 
     public function user() {

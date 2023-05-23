@@ -13,7 +13,8 @@ class ChannelController extends Controller
     public function index()
     {
         // return all channels
-        return auth()->user()->channel;
+        
+        return Channel::all();
     }
 
     /**
@@ -35,9 +36,14 @@ class ChannelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(channel $channel)
+    public function show(String $id)
     {
-        //
+        // return a channel by id
+        $channel =  Channel::findOrFail($id);
+        $messages = $channel->messages;
+        // return the data with specific names
+        
+        return [ $channel, $messages];
     }
 
     /**

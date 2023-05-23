@@ -13,6 +13,11 @@ class UserChannelController extends Controller
     public function index()
     {
         //
+        $channels = auth()->user()->channels;
+        foreach($channels as $channel){
+            $channel->channel;
+        }
+        return $channels;
     }
 
     /**
@@ -34,9 +39,13 @@ class UserChannelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(UserChannel $userChannel)
+    public function show(String $id)
     {
-        //
+        // return a channel by id
+        $channel =  UserChannel::where('channel_id',$id)->get();
+        $messages = $channel;
+        return [ $channel, $messages];
+        
     }
 
     /**
