@@ -35,7 +35,7 @@ Route::delete("/module/delete", [\App\Http\Controllers\ModuleController::class, 
 Route::put("/video/edit", [\App\Http\Controllers\VideoController::class, 'editVideo']);
 Route::post("/video/add", [\App\Http\Controllers\VideoController::class, 'addVideo']);
 Route::delete("/video/delete", [\App\Http\Controllers\VideoController::class, 'deleteVideo']);
-=======
+
 // route for updating the users information
 Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
 

@@ -13,7 +13,7 @@ class VideoController extends Controller
         return Video::with('module')->orderBy('module_id')->get();
     }
     public function getVideoById(Request $request, $id){
-        $video = Video::find($id);
+        $video = Video::with('questions')->find($id);
         $module = Module::with('videos')->find($video->module_id);
 
         return response()->json([

@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Question;
+use App\Models\Question_Answer;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\Module;
@@ -15,7 +17,9 @@ class ModuleSeeder extends Seeder
     public function run(): void
     {
         Module::factory()
-            ->has(Video::factory()->count(3))
+            ->has(Video::factory()
+                ->has(Question::factory()->has(Question_Answer::factory()->count(4)))
+                ->count(3))
             ->create(
                 ['title' => 'Klassenmanagement']
         );
