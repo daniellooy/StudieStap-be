@@ -33,7 +33,12 @@ class DatabaseSeeder extends Seeder
             ModuleSeeder::class,
         ]);
         // make channels
-        $channels = Channel::factory()->count(3)->create();
+        $image = ['images/Alpha-Symbol.png', 'images/Beta-Symbol.jpg'];
+        // get a random image from the array
+        $randomImage = $image[array_rand($image)];
+        $channels = Channel::factory()->count(3)->create([
+            'image_path' => $randomImage,
+        ]);
         foreach ($channels as $channel) {
             foreach (User::all() as $user) {
               $userChannel = UserChannel::factory()->create([
