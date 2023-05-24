@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
                     'channel_id' => $channel->id,
                 ]);
                 Message::factory()->count(1)->create([
-                    'user_channel_id' => $userChannel->user_id,
+                    'user_id' => $userChannel->user_id,
                     'channel_id' => $userChannel->channel_id,
                 ]);
             }

@@ -15,11 +15,11 @@ return new class extends Migration
             $table->id();
             $table->text('message')->nullable();
             $table->unsignedBigInteger('channel_id');
-            $table->unsignedBigInteger('user_channel_id');
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('response_to_id')->nullable();
 
             $table->foreign('channel_id')->references('id')->on('channels')->onDelete('cascade');
-            $table->foreign('user_channel_id')->references('id')->on('user_channels')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('response_to_id')->references('id')->on('messages')->onDelete('cascade');
             $table->timestamps();
         });

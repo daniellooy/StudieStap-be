@@ -45,11 +45,6 @@ class MessageController extends Controller
             ]);
             $appendix->save();
         }
-
-
-        
-
-
         $message = new message([
             'message' => $request->message,
             'user_id' => auth()->user()->id,

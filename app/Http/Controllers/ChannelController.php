@@ -39,11 +39,9 @@ class ChannelController extends Controller
     public function show(String $id)
     {
         // return a channel by id
-        $channel =  Channel::findOrFail($id);
-        $messages = $channel->messages;
+        $channel =  Channel::where('id',$id)->with('messages')->first();
         // return the data with specific names
-        
-        return [ $channel, $messages];
+        return $channel;
     }
 
     /**

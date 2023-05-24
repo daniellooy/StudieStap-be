@@ -29,7 +29,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
 Route::middleware('auth:sanctum')->get('/channels',[UserChannelController::class, 'index']);
 // route for getting a channel
-Route::middleware('auth:sanctum')->get('/channel/{id}',[UserChannelController::class, 'show']);
+Route::middleware('auth:sanctum')->get('/channel/{id}',[ChannelController::class, 'show']);
 Route::middleware('auth:sanctum')->get('/channel/{id}/messages',[MessageController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/channel/{id}/messages',[MessageController::class, 'create']);
 
