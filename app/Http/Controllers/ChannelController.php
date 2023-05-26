@@ -39,7 +39,9 @@ class ChannelController extends Controller
     public function show(String $id)
     {
         // return a channel by id
-        $channel =  Channel::where('id',$id)->with('messages.user')->first();
+        // order by messages created_at
+
+        $channel =  Channel::orderBy('created_at')->where('id',$id)->with('messages.user')->first();
         // return the data with specific names
         return $channel;
     }

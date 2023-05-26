@@ -11,6 +11,8 @@ class Message extends Model
     use HasFactory;
     protected $fillable = [
         'message',
+        "channel_id",
+        "user_id",
     ];
 
     public function channel() {

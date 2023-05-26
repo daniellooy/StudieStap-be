@@ -29,7 +29,7 @@ class UserController extends Controller
         if(!empty($profile_image)){
             $filename = $request->file('profile_image_file')->getClientOriginalName(); 
             $file = $request->file('profile_image_file')->storeAs('images', $filename);
-
+            $user->image = $file;
             $user->save();
         }
 
@@ -39,7 +39,6 @@ class UserController extends Controller
             'lastname' => $request->last_name,
             'bio' => $request->biography,
             'phone' => $request->phone,
-            'image' => $file,
             'workshop' => $request->workshop,
             'city' => $request->city,
             'street' => $request->street,

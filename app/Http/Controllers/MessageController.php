@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\message;
-use App\Models\messageAppendix;
+use App\Models\Message;
+use App\Models\MessageAppendix;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
@@ -33,24 +33,33 @@ class MessageController extends Controller
         $request->validate([
             'message' => 'required',
         ]);
-        $userChannel = auth()->user()->channel;
-        if($userChannel->id != $request->channel_id){
-            return response()->json([
-                'message' => 'You are not allowed to post in this channel'
-            ], 403);
-        }
-        if($request->appendix){
-            $appendix = new messageAppendix([
-                'appendix' => $request->appendix,
-            ]);
-            $appendix->save();
-        }
-        $message = new message([
+
+        
+        $userChannels = auth()->user()->channels;
+        // rfind the channel that the request is trying to post in
+        $userChannel = $userChannels->where('channel_id',$request->channel_id)->first();
+        // if($userChannel->id != $request->channel_id){
+        //     return response()->json([
+        //         'message' => 'You are not allowed to post in this channel'
+        //     ], 403);
+        // }
+        // if($request->appendix){
+        //     $appendix = new messageAppendix([
+        //         'appendix' => $request->appendix,
+        //     ]);
+        //     $appendix->save();
+        // }
+
+        // create a new message
+        $message = new Message([
             'message' => $request->message,
             'user_id' => auth()->user()->id,
-            'channel_id' => auth()->user()->channel->id,
+            'channel_id' => $userChannel->channel_id,
         ]);
+
+        // save the message
         $message->save();
+
         return $message;
     }
 
