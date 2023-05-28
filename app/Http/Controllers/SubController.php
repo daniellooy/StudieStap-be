@@ -2,24 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreAchievementRequest;
-use App\Http\Requests\UpdateAchievementRequest;
-use App\Models\Achievement;
+use App\Http\Requests\StoreSubRequest;
+use App\Http\Requests\UpdateSubRequest;
+use App\Models\Sub;
 
-class AchievementController extends Controller
+class SubController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return response()->json(Achievement::with('subs')->get());
+        return response()->json(Sub::all());
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreAchievementRequest $request)
+    public function store(StoreSubRequest $request)
     {
         //
     }
@@ -27,7 +27,7 @@ class AchievementController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Achievement $achievement)
+    public function show(Sub $sub)
     {
         //
     }
@@ -35,7 +35,7 @@ class AchievementController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateAchievementRequest $request, Achievement $achievement)
+    public function update(UpdateSubRequest $request, Sub $sub)
     {
         //
     }
@@ -43,7 +43,7 @@ class AchievementController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Achievement $achievement)
+    public function destroy(Sub $sub)
     {
         //
     }

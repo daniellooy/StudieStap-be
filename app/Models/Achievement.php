@@ -12,4 +12,8 @@ class Achievement extends Model
     protected $fillable = [
 'name', 'description', 
     ];
+
+    public function subs() {
+        return $this->hasMany(Sub::class);
+    }
 }
