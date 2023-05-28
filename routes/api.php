@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\SubsDoneController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AchievementController;
 use App\Http\Controllers\SubController;
@@ -18,8 +19,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// All these routes need authentication
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/user', fn(Request $req) => $req->user());
+    // route for updating the users information
+    Route::put('/user',[UserController::class, 'update']);
+
+    Route::get('/achievements', [AchievementController::class, 'index']);
+    Route::post('/achievements', [AchievementController::class, 'store']);
+    Route::post('/achievements/{achievement}/subs', [SubController::class, 'store']);
+
+    Route::get('/subs', [SubController::class, 'index']);
+
+    Route::post('/subs/{sub}/request', [SubsDoneController::class, 'store']);
+    Route::post('/subs/{sub}/requests/{subsDone}/status', [SubsDoneController::class, 'update']);
+
 });
 
 
@@ -35,14 +49,3 @@ Route::delete("/module/delete", [\App\Http\Controllers\ModuleController::class, 
 Route::put("/video/edit", [\App\Http\Controllers\VideoController::class, 'editVideo']);
 Route::post("/video/add", [\App\Http\Controllers\VideoController::class, 'addVideo']);
 Route::delete("/video/delete", [\App\Http\Controllers\VideoController::class, 'deleteVideo']);
-
-// route for updating the users information
-Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
-
-
-Route::get("/test", function(){
-    return "Test";
-});
-
-Route::get('/achievements', [AchievementController::class, 'index']);
-Route::get('/subs', [SubController::class, 'index']);

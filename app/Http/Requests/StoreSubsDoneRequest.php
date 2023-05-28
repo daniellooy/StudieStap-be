@@ -4,8 +4,9 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateAchievementRequest extends FormRequest
+class StoreSubsDoneRequest extends FormRequest
 {
+
 
     /**
      * Get the validation rules that apply to the request.

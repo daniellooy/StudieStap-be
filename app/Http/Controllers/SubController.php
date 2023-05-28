@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreSubRequest;
 use App\Http\Requests\UpdateSubRequest;
+use App\Models\Achievement;
 use App\Models\Sub;
 
 class SubController extends Controller
@@ -19,9 +20,11 @@ class SubController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSubRequest $request)
+    public function store(StoreSubRequest $request, Achievement $achievement)
     {
-        //
+       $sub = $achievement->subs()->create($request->validated());
+
+       return response()->json($sub);
     }
 
     /**
@@ -29,7 +32,7 @@ class SubController extends Controller
      */
     public function show(Sub $sub)
     {
-        //
+        return response()->json($sub);
     }
 
     /**
@@ -45,6 +48,6 @@ class SubController extends Controller
      */
     public function destroy(Sub $sub)
     {
-        //
+        $sub->delete();
     }
 }
