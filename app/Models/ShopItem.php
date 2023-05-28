@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class ShopItem extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+
+    ];
+
+    public function purchases() {
+        return $this->hasMany(ShopItemPurchase::class);
+    }
 }
