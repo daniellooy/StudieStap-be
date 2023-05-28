@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('channels', function (Blueprint $table) {
+        Schema::create('message_appendixes', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('image_path')->nullable();
-            $table->string('description');
+            $table->unsignedBigInteger('message_id');
+            $table->string('appendix_type');
+            $table->string('appendix_path');
             $table->timestamps();
+
+            $table->foreign('message_id')->references('id')->on('messages')->onDelete('cascade');
         });
     }
 
@@ -25,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('channels');
+        Schema::dropIfExists('message_appendixes');
     }
 };
