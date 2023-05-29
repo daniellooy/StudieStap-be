@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('description');
             $table->string('thumbnail');
+            $table->unsignedBigInteger('learningcategory_id');
+            $table->foreign('learningcategory_id')->on('learningcategory')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }

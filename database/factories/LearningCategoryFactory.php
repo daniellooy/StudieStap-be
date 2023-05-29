@@ -5,9 +5,9 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Question>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
  */
-class QuestionFactory extends Factory
+class LearningCategoryFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,8 +17,8 @@ class QuestionFactory extends Factory
     public function definition(): array
     {
         return [
-            'question'=> fake()->realText,
-            'explanation'=> fake()->realText,
+            'title' => fake()->word(),
+            'description' => fake()->realText(),
         ];
     }
 }

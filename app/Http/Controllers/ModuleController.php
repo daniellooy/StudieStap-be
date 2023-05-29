@@ -20,6 +20,7 @@ class ModuleController extends Controller
         $module = Module::find($request->id);
         $module->title = $request->title;
         $module->description = $request->description;
+        $module->learningcategory_id = $request->learningcategory_id;
         $file = $request->file('thumbnail');
         if(!empty($file)){
             $path = $file->store('video_thumbnails');
@@ -38,6 +39,7 @@ class ModuleController extends Controller
         $module = new Module([
             'title' => $request->title,
             'description' => $request->description,
+            'learningcategory_id' => $request->learningcategory_id,
             'thumbnail' => '/' . $path,
         ]);
         $module->save();

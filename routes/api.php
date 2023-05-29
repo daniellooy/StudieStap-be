@@ -23,10 +23,25 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
+// route for updating the users information
+Route::put('/user',[UserController::class, 'update']);
+Route::middleware('auth:sanctum')->get('/channels',[UserChannelController::class, 'index']);
+// route for getting a channel
+Route::middleware('auth:sanctum')->get('/channel/{id}',[UserChannelController::class, 'show']);
+Route::middleware('auth:sanctum')->get('/channel/{id}/messages',[MessageController::class, 'index']);
+Route::middleware('auth:sanctum')->post('/channel/{id}/messages',[MessageController::class, 'create']);
+
 Route::get("/modules", [\App\Http\Controllers\ModuleController::class, 'index']);
+Route::get("/categories", [\App\Http\Controllers\LearningCategoryController::class, 'index']);
 Route::get("/videos", [\App\Http\Controllers\VideoController::class, 'index']);
 Route::get("/video/{id}", [\App\Http\Controllers\VideoController::class, 'getVideoById']);
+Route::get("/category/{id}", [\App\Http\Controllers\LearningCategoryController::class, 'getCategoryById']);
 Route::get("/module/{id}", [\App\Http\Controllers\ModuleController::class, 'getModuleVideos']);
+Route::get("/question/{id}", [\App\Http\Controllers\QuestionController::class, 'getQuestion']);
+
+Route::post("/category/add", [\App\Http\Controllers\LearningCategoryController::class, 'addCategory']);
+Route::put("/category/edit", [\App\Http\Controllers\LearningCategoryController::class, 'editCategory']);
+Route::delete("/category/delete", [\App\Http\Controllers\LearningCategoryController::class, 'deleteCategory']);
 
 Route::post("/module/add", [\App\Http\Controllers\ModuleController::class, 'addModule']);
 Route::put("/module/edit", [\App\Http\Controllers\ModuleController::class, 'editModule']);
