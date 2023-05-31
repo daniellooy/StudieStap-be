@@ -13,6 +13,7 @@ class Message extends Model
         'message',
         "channel_id",
         "user_id",
+        "response_to_id",
     ];
 
     public function channel() {
