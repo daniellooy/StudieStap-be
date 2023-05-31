@@ -11,6 +11,7 @@ class SubsDone extends Model
 
     protected $fillable = [
         'status',
+        'user_id',
     ];
 
     public function user() {
