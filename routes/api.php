@@ -34,10 +34,17 @@ Route::middleware('auth:sanctum')->post('/channel/{id}/messages',[MessageControl
 Route::get("/modules", [\App\Http\Controllers\ModuleController::class, 'index']);
 Route::get("/categories", [\App\Http\Controllers\LearningCategoryController::class, 'index']);
 Route::get("/videos", [\App\Http\Controllers\VideoController::class, 'index']);
+Route::get("/questions", [\App\Http\Controllers\QuestionController::class, 'index']);
 Route::get("/video/{id}", [\App\Http\Controllers\VideoController::class, 'getVideoById']);
 Route::get("/category/{id}", [\App\Http\Controllers\LearningCategoryController::class, 'getCategoryById']);
 Route::get("/module/{id}", [\App\Http\Controllers\ModuleController::class, 'getModuleVideos']);
 Route::get("/question/{id}", [\App\Http\Controllers\QuestionController::class, 'getQuestion']);
+
+
+
+Route::post("/question/add", [\App\Http\Controllers\QuestionController::class, 'addQuestion']);
+Route::put("/question/edit", [\App\Http\Controllers\QuestionController::class, 'editQuestion']);
+Route::delete("/question/delete", [\App\Http\Controllers\QuestionController::class, 'deleteQuestion']);
 
 Route::post("/category/add", [\App\Http\Controllers\LearningCategoryController::class, 'addCategory']);
 Route::put("/category/edit", [\App\Http\Controllers\LearningCategoryController::class, 'editCategory']);

@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('question');
             $table->string('explanation');
             $table->unsignedBigInteger('video_id');
-            $table->foreign('video_id')->on('videos')->references('id');
+            $table->foreign('video_id')->on('videos')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }
