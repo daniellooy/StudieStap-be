@@ -14,12 +14,12 @@ class ShopItemController extends Controller
      */
     public function index(Request $request)
     {
-        $achievementsWithSubsAndDoneForUser = ShopItem::query()
+        $shopitemsWithPurchases = ShopItem::query()
             ->with([
                 'purchases'=> fn($query) => $query->where('user_id', $request->user()->id)
             ])
             ->get();
-        return response()->json($achievementsWithSubsAndDoneForUser);
+        return response()->json($shopitemsWithPurchases);
         
         // return response()->json(ShopItem::all());
     }
