@@ -31,45 +31,32 @@ class MessageController extends Controller
         // if the message has an appendix create a new appendix
         // return the message
         // validate if there is a message or appendix_files
+        $userChannels = auth()->user()->channels;
+        // rfind the channel that the request is trying to post in
+        $userChannel = $userChannels->where('channel_id',$request->channel_id)->first();
 
         $uploadedFiles = $request->appendix_files;
+        $message = new Message([
+            'message' => $request->message,
+            'user_id' => auth()->user()->id,
+            'channel_id' => $userChannel->channel_id,
+        ]);
+        $message->save();
         if(!empty($uploadedFiles)){
             foreach ($uploadedFiles as $file){
                 $filename = $file->getClientOriginalName(); 
                 $file->storeAs('files', $filename);
                 $fileType = $file->extension();
                 $path = "files/" . $filename;
-                return $path;
-                // return $fileType;?
-                // create an appendix object
                 $appendix = new MessageAppendix([
-                    'message_id' => $request->id,
+                    'message_id' => $message->id,
                     'appendix_type' => $fileType,
-                    'appendix_path' => 'null',
+                    'appendix_path' => $path,
                 ]);
-                // $user->image = $file;
-                // $user->save();
+                $appendix->save();
             }
         }
-        if(!empty($request->message)){
-            $userChannels = auth()->user()->channels;
-            // rfind the channel that the request is trying to post in
-            $userChannel = $userChannels->where('channel_id',$request->channel_id)->first();
-            if($userChannel->id != $request->channel_id){
-                return response()->json([
-                    'message' => 'You are not allowed to post in this channel'
-                ], 403);
-            }
-            $message = new Message([
-                'message' => $request->message,
-                'user_id' => auth()->user()->id,
-                'channel_id' => $userChannel->channel_id,
-            ]);
-
-            // save the message
-            $message->save();
-        }
-        return response(['status'=>'succes'], $message);
+        return response(['status'=>'succes'], 200);
     }
 
     /**

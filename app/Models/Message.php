@@ -22,7 +22,7 @@ class Message extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function appendix(): HasMany {
+    public function appendix() {
         return $this->hasMany(MessageAppendix::class);
     }
 }

@@ -9,6 +9,7 @@ class MessageAppendix extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'message_id',
         'appendix_type',
         'appendix_path',
     ];
