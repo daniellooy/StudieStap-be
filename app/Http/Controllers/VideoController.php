@@ -5,15 +5,24 @@ namespace App\Http\Controllers;
 use App\Models\Module;
 use Illuminate\Http\Request;
 use App\Models\Video;
+use Illuminate\Support\Facades\Auth;
 
 class VideoController extends Controller
 {
 
     public function index(Request $request){
-        return Video::with('module')->orderBy('module_id')->with('questions')->get();
+        $videos = Video::with('module')->orderBy('module_id')->with('questions')->get();
+
+        foreach ($videos as $video){
+            $video->completed = $video->userCompletedThisVideo(auth('sanctum')->user()->id);
+        }
+
+        return $videos;
     }
+
     public function getVideoById(Request $request, $id){
         $video = Video::with('questions')->find($id);
+        $video->completed = $video->userCompletedThisVideo(auth('sanctum')->user()->id);
         $module = Module::with('videos')->find($video->module_id);
 
         return response()->json([

@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\UserCompletedVideos;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File as FileFacade;
 
@@ -29,7 +30,7 @@ class DatabaseSeeder extends Seeder
             ModuleSeeder::class,
             AchievementSeeder::class,
             SubSeeder::class,
-
+            UserCompletedVideosSeeder::class,
         ]);
         $image = FileFacade::files(public_path('images'));
 

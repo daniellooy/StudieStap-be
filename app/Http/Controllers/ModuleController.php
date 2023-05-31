@@ -13,7 +13,18 @@ class ModuleController extends Controller
     }
 
     public function getModuleVideos(Request $request, $id){
-        return Module::with('videos')->find($id);
+        $module = Module::with('videos')->find($id);
+        $alltrue = true;
+
+        foreach($module->videos as $video){
+            $video->completed = $video->userCompletedThisVideo(auth('sanctum')->user()->id);
+            if($video->completed == false){
+                $alltrue = false;
+            }
+        }
+
+        $module->completed = $alltrue;
+        return $module;
     }
 
     public function editModule(Request $request){

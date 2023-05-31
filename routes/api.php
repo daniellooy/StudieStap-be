@@ -31,32 +31,29 @@ Route::middleware('auth:sanctum')->get('/channel/{id}',[UserChannelController::c
 Route::middleware('auth:sanctum')->get('/channel/{id}/messages',[MessageController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/channel/{id}/messages',[MessageController::class, 'create']);
 
-Route::get("/modules", [\App\Http\Controllers\ModuleController::class, 'index']);
-Route::get("/categories", [\App\Http\Controllers\LearningCategoryController::class, 'index']);
-Route::get("/videos", [\App\Http\Controllers\VideoController::class, 'index']);
-Route::get("/questions", [\App\Http\Controllers\QuestionController::class, 'index']);
-Route::get("/video/{id}", [\App\Http\Controllers\VideoController::class, 'getVideoById']);
-Route::get("/category/{id}", [\App\Http\Controllers\LearningCategoryController::class, 'getCategoryById']);
-Route::get("/module/{id}", [\App\Http\Controllers\ModuleController::class, 'getModuleVideos']);
-Route::get("/question/{id}", [\App\Http\Controllers\QuestionController::class, 'getQuestion']);
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get("/modules", [\App\Http\Controllers\ModuleController::class, 'index']);
+    Route::get("/categories", [\App\Http\Controllers\LearningCategoryController::class, 'index']);
+    Route::get("/videos", [\App\Http\Controllers\VideoController::class, 'index']);
+    Route::get("/questions", [\App\Http\Controllers\QuestionController::class, 'index']);
+    Route::get("/video/{id}", [\App\Http\Controllers\VideoController::class, 'getVideoById']);
+    Route::get("/category/{id}", [\App\Http\Controllers\LearningCategoryController::class, 'getCategoryById']);
+    Route::get("/module/{id}", [\App\Http\Controllers\ModuleController::class, 'getModuleVideos']);
+    Route::get("/question/{id}", [\App\Http\Controllers\QuestionController::class, 'getQuestion']);
+    Route::post("/question/add", [\App\Http\Controllers\QuestionController::class, 'addQuestion']);
+    Route::put("/question/edit", [\App\Http\Controllers\QuestionController::class, 'editQuestion']);
+    Route::delete("/question/delete", [\App\Http\Controllers\QuestionController::class, 'deleteQuestion']);
+    Route::post("/category/add", [\App\Http\Controllers\LearningCategoryController::class, 'addCategory']);
+    Route::put("/category/edit", [\App\Http\Controllers\LearningCategoryController::class, 'editCategory']);
+    Route::delete("/category/delete", [\App\Http\Controllers\LearningCategoryController::class, 'deleteCategory']);
+    Route::post("/module/add", [\App\Http\Controllers\ModuleController::class, 'addModule']);
+    Route::put("/module/edit", [\App\Http\Controllers\ModuleController::class, 'editModule']);
+    Route::delete("/module/delete", [\App\Http\Controllers\ModuleController::class, 'deleteModule']);
+    Route::put("/video/edit", [\App\Http\Controllers\VideoController::class, 'editVideo']);
+    Route::post("/video/add", [\App\Http\Controllers\VideoController::class, 'addVideo']);
+    Route::delete("/video/delete", [\App\Http\Controllers\VideoController::class, 'deleteVideo']);
+});
 
-
-
-Route::post("/question/add", [\App\Http\Controllers\QuestionController::class, 'addQuestion']);
-Route::put("/question/edit", [\App\Http\Controllers\QuestionController::class, 'editQuestion']);
-Route::delete("/question/delete", [\App\Http\Controllers\QuestionController::class, 'deleteQuestion']);
-
-Route::post("/category/add", [\App\Http\Controllers\LearningCategoryController::class, 'addCategory']);
-Route::put("/category/edit", [\App\Http\Controllers\LearningCategoryController::class, 'editCategory']);
-Route::delete("/category/delete", [\App\Http\Controllers\LearningCategoryController::class, 'deleteCategory']);
-
-Route::post("/module/add", [\App\Http\Controllers\ModuleController::class, 'addModule']);
-Route::put("/module/edit", [\App\Http\Controllers\ModuleController::class, 'editModule']);
-Route::delete("/module/delete", [\App\Http\Controllers\ModuleController::class, 'deleteModule']);
-
-Route::put("/video/edit", [\App\Http\Controllers\VideoController::class, 'editVideo']);
-Route::post("/video/add", [\App\Http\Controllers\VideoController::class, 'addVideo']);
-Route::delete("/video/delete", [\App\Http\Controllers\VideoController::class, 'deleteVideo']);
 
 // route for updating the users information
 Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
