@@ -30,37 +30,46 @@ class MessageController extends Controller
         // if yes create a new message
         // if the message has an appendix create a new appendix
         // return the message
-        $request->validate([
-            'message' => 'required',
-        ]);
+        // validate if there is a message or appendix_files
 
-        
-        $userChannels = auth()->user()->channels;
-        // rfind the channel that the request is trying to post in
-        $userChannel = $userChannels->where('channel_id',$request->channel_id)->first();
-        // if($userChannel->id != $request->channel_id){
-        //     return response()->json([
-        //         'message' => 'You are not allowed to post in this channel'
-        //     ], 403);
-        // }
-        // if($request->appendix){
-        //     $appendix = new messageAppendix([
-        //         'appendix' => $request->appendix,
-        //     ]);
-        //     $appendix->save();
-        // }
+        $uploadedFiles = $request->appendix_files;
+        if(!empty($uploadedFiles)){
+            foreach ($uploadedFiles as $file){
+                $filename = $file->getClientOriginalName(); 
+                $file->storeAs('files', $filename);
+                $fileType = $file->extension();
+                $path = "files/" . $filename;
+                return $path;
+                // return $fileType;?
+                // create an appendix object
+                $appendix = new MessageAppendix([
+                    'message_id' => $request->id,
+                    'appendix_type' => $fileType,
+                    'appendix_path' => 'null',
+                ]);
+                // $user->image = $file;
+                // $user->save();
+            }
+        }
+        if(!empty($request->message)){
+            $userChannels = auth()->user()->channels;
+            // rfind the channel that the request is trying to post in
+            $userChannel = $userChannels->where('channel_id',$request->channel_id)->first();
+            if($userChannel->id != $request->channel_id){
+                return response()->json([
+                    'message' => 'You are not allowed to post in this channel'
+                ], 403);
+            }
+            $message = new Message([
+                'message' => $request->message,
+                'user_id' => auth()->user()->id,
+                'channel_id' => $userChannel->channel_id,
+            ]);
 
-        // create a new message
-        $message = new Message([
-            'message' => $request->message,
-            'user_id' => auth()->user()->id,
-            'channel_id' => $userChannel->channel_id,
-        ]);
-
-        // save the message
-        $message->save();
-
-        return $message;
+            // save the message
+            $message->save();
+        }
+        return response(['status'=>'succes'], $message);
     }
 
     /**

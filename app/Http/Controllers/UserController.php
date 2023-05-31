@@ -24,7 +24,8 @@ class UserController extends Controller
     {
 
         $user = User::findOrFail($request->id);
-        $profile_image = $request->file('profile_image_file');
+        $profile_image = $request->file('profile_image_file'); 
+        return $profile_image;
         
         if(!empty($profile_image)){
             $filename = $request->file('profile_image_file')->getClientOriginalName(); 
