@@ -19,6 +19,6 @@ class SubsDone extends Model
     }
 
     public function sub() {
-        return $this->belongsTo(Sub::class);
+        return $this->belongsTo(Sub::class)->with("achievement");
     }
 }

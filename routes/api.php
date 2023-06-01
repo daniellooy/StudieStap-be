@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ShopItemController;
+use App\Http\Controllers\ShopItemPurchaseController;
 use App\Http\Controllers\SubsDoneController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AchievementController;
@@ -33,12 +34,14 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/subs', [SubController::class, 'index']);
 
     Route::post('/subs/{sub}/request', [SubsDoneController::class, 'store']);
-    Route::post('/subs/{sub}/requests/{subsDone}/status', [SubsDoneController::class, 'update']);
+    Route::post('/subs/requests/{subsDone}/status', [SubsDoneController::class, 'update']);
 
     Route::get('/shopitems', [ShopItemController::class, 'index']);
     Route::post('/shopitems', [ShopItemController::class, 'store']);
 
-    Route::post('/shopitems/{shopitem}/purchase', [ShopItemController::class, 'store']);
+    Route::get('/subsdone', [SubsDoneController::class, 'index']);
+
+    Route::post('/shopitems/{shopitem}/purchase', [ShopItemPurchaseController::class, 'store']);
 
 });
 

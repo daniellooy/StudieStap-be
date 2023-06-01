@@ -15,7 +15,15 @@ class SubsDoneController extends Controller
      */
     public function index(Sub $sub)
     {
-        //
+
+        $subsDoneWithUserAndSub = SubsDone::query()
+            ->with([
+                'sub',
+                'user',
+            ])
+            ->where("status", "=" , "pending")
+            ->get();
+        return response()->json($subsDoneWithUserAndSub);
     }
 
     /**
@@ -38,8 +46,14 @@ class SubsDoneController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubsDoneRequest $request, Sub $sub, SubsDone $subsDone)
+    public function update(UpdateSubsDoneRequest $request, SubsDone $subsDone)
     {
+        $user = auth('sanctum')->user();
+        $sub = $subsDone->sub;
+        if($request->status == "accepted"){
+            $user->points += $sub->points;
+            $user->save();
+        }
         $subsDone->update($request->validated());
 
         return $subsDone;

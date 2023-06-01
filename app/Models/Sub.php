@@ -16,4 +16,8 @@ class Sub extends Model
     public function done() {
         return $this->hasMany(SubsDone::class);
     }
+
+    public function achievement() {
+        return $this->belongsTo(Achievement::class);
+    }
 }

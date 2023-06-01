@@ -22,8 +22,20 @@ class ShopItemPurchaseController extends Controller
      */
     public function store(StoreShopItemPurchaseRequest $request, ShopItem $shopitem)
     {
-        $shopItemPurchase = $shopitem->purchases()->create([ 'user_id' => $request->user()->id ]);
-        return response()->json($shopItemPurchase);
+        //checken of gebruiker genoeg punten heeft
+        $user = auth('sanctum')->user();
+        if($user->points >= $shopitem->price){
+            $user->points -= $shopitem->price;
+            $user->save();
+
+            $shopItemPurchase = $shopitem->purchases()->create([ 'user_id' => $request->user()->id ]);
+            return response()->json($shopItemPurchase);
+        }
+        else{
+            return "banan";
+        }
+
+
     }
 
     /**
