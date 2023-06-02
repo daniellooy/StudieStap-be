@@ -43,7 +43,7 @@ class ChannelController extends Controller
         // get the channel messages and the appendixes of that message
 
 
-        $channel =  Channel::orderBy('created_at')->where('id',$id)->with('messages.user', 'messages.appendix')->first();
+        $channel =  Channel::orderBy('created_at')->where('id',$id)->with('messages.user', 'messages.appendix', 'messages.responseTo.user')->first();
         // return the data with specific names
         return $channel;
     }

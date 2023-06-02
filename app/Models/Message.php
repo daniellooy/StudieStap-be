@@ -26,4 +26,7 @@ class Message extends Model
     public function appendix() {
         return $this->hasMany(MessageAppendix::class);
     }
+    public function responseTo() {
+        return $this->belongsTo(Message::class);
+    }
 }
