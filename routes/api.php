@@ -24,7 +24,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+// get all the users
+Route::middleware('auth:sanctum')->get('/user',[UserController::class, 'index']);
 // route for updating the users information
 Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
 Route::middleware('auth:sanctum')->get('/channels',[UserChannelController::class, 'index']);
@@ -32,6 +33,12 @@ Route::middleware('auth:sanctum')->get('/channels',[UserChannelController::class
 Route::middleware('auth:sanctum')->get('/channel/{id}',[ChannelController::class, 'show']);
 Route::middleware('auth:sanctum')->get('/channel/{id}/messages',[MessageController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/channel/messages',[MessageController::class, 'create']);
+
+// routes for creating, editing and deleting a channel
+Route::middleware('auth:sanctum')->post('/channel/add',[ChannelController::class, 'create']);
+Route::middleware('auth:sanctum')->put('/channel/edit',[ChannelController::class, 'edit']);
+Route::middleware('auth:sanctum')->delete('/channel/delete',[ChannelController::class, 'delete']);
+
 
 Route::get("/modules", [\App\Http\Controllers\ModuleController::class, 'index']);
 Route::get("/videos", [\App\Http\Controllers\VideoController::class, 'index']);
