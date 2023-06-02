@@ -52,6 +52,8 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::put("/video/edit", [\App\Http\Controllers\VideoController::class, 'editVideo']);
     Route::post("/video/add", [\App\Http\Controllers\VideoController::class, 'addVideo']);
     Route::delete("/video/delete", [\App\Http\Controllers\VideoController::class, 'deleteVideo']);
+    Route::post("/completevideo", [\App\Http\Controllers\UserCompletedVideoController::class, 'completeVideo']);
+    Route::post("/answerquestion", [\App\Http\Controllers\UserAnswersController::class, 'answerquestion']);
 });
 
 

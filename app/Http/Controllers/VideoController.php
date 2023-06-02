@@ -12,11 +12,9 @@ class VideoController extends Controller
 
     public function index(Request $request){
         $videos = Video::with('module')->orderBy('module_id')->with('questions')->get();
-
         foreach ($videos as $video){
             $video->completed = $video->userCompletedThisVideo(auth('sanctum')->user()->id);
         }
-
         return $videos;
     }
 
@@ -24,6 +22,14 @@ class VideoController extends Controller
         $video = Video::with('questions')->find($id);
         $video->completed = $video->userCompletedThisVideo(auth('sanctum')->user()->id);
         $module = Module::with('videos')->find($video->module_id);
+
+        foreach ($module->videos as $video){
+            $video->completed = $video->userCompletedThisVideo(auth('sanctum')->user()->id);
+
+            foreach ($video->questions as $question){
+                $question->answered = $question->userHasAnsweredThisQuestion(auth('sanctum')->user()->id);
+            }
+        }
 
         return response()->json([
             'video' => $video,

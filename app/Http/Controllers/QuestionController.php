@@ -3,13 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question_Answer;
+use App\Models\UserAnswer;
 use Illuminate\Http\Request;
 use App\Models\Question;
 
 class QuestionController extends Controller
 {
     function getQuestion(Request $request, $id){
-        return Question::with('questionAnswer')->find($id);
+        $question = Question::with('questionAnswer')->find($id);
+        $question->answered = $question->userHasAnsweredThisQuestion(auth('sanctum')->user()->id);
+        if($question->answered){
+            $useranswer = UserAnswer::query()
+                ->where('user_id', '=', auth('sanctum')->user()->id)
+                ->where('question_id', '=', $question->id)->first();
+            $question->userAnswer = $useranswer;
+        }
+
+        return $question;
     }
 
     function index(){
