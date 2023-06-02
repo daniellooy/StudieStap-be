@@ -25,7 +25,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-<<<<<<< HEAD
 // route for updating the users information
 Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
 Route::middleware('auth:sanctum')->get('/channels',[UserChannelController::class, 'index']);
@@ -33,8 +32,6 @@ Route::middleware('auth:sanctum')->get('/channels',[UserChannelController::class
 Route::middleware('auth:sanctum')->get('/channel/{id}',[ChannelController::class, 'show']);
 Route::middleware('auth:sanctum')->get('/channel/{id}/messages',[MessageController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/channel/messages',[MessageController::class, 'create']);
-=======
->>>>>>> development
 
 Route::get("/modules", [\App\Http\Controllers\ModuleController::class, 'index']);
 Route::get("/videos", [\App\Http\Controllers\VideoController::class, 'index']);
@@ -48,13 +45,8 @@ Route::delete("/module/delete", [\App\Http\Controllers\ModuleController::class, 
 Route::put("/video/edit", [\App\Http\Controllers\VideoController::class, 'editVideo']);
 Route::post("/video/add", [\App\Http\Controllers\VideoController::class, 'addVideo']);
 Route::delete("/video/delete", [\App\Http\Controllers\VideoController::class, 'deleteVideo']);
-<<<<<<< HEAD
-=======
-=======
 // route for updating the users information
 Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
-
->>>>>>> development
 
 Route::get("/test", function(){
     return "Test";
