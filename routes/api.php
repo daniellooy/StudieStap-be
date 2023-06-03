@@ -28,7 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::middleware('auth:sanctum')->get('/users',[UserController::class, 'show']);
 // route for updating the users information
 Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
-Route::middleware('auth:sanctum')->get('/channels',[UserChannelController::class, 'show']);
+Route::middleware('auth:sanctum')->get('/channels',[ChannelController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/channels/{id}',[UserChannelController::class, 'show']);
 // route for getting a channel
 Route::middleware('auth:sanctum')->get('/channel/{id}',[ChannelController::class, 'show']);
 Route::middleware('auth:sanctum')->get('/channel/{id}/messages',[MessageController::class, 'index']);

@@ -30,7 +30,7 @@ class MessageController extends Controller
         $message = new Message([
             'message' => $request->message,
             'user_id' => auth()->user()->id,
-            'response_to_id' => $request->response_to,
+            'response_to_id' => $request->response_to_id,
             'channel_id' => $userChannel->channel_id,
         ]);
         $message->save();

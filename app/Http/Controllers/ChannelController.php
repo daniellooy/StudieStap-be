@@ -15,7 +15,8 @@ class ChannelController extends Controller
     public function index()
     {
         // return all channels
-        return Channel::all();
+        $channels = Channel::with("users")->get();
+        return $channels;
     }
 
     /**
