@@ -23,10 +23,10 @@ class VideoController extends Controller
         $video->completed = $video->userCompletedThisVideo(auth('sanctum')->user()->id);
         $module = Module::with('videos')->find($video->module_id);
 
-        foreach ($module->videos as $video){
-            $video->completed = $video->userCompletedThisVideo(auth('sanctum')->user()->id);
+        foreach ($module->videos as $videoloop){
+            $videoloop->completed = $videoloop->userCompletedThisVideo(auth('sanctum')->user()->id);
 
-            foreach ($video->questions as $question){
+            foreach ($videoloop->questions as $question){
                 $question->answered = $question->userHasAnsweredThisQuestion(auth('sanctum')->user()->id);
             }
         }
