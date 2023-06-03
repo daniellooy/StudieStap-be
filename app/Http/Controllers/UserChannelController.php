@@ -43,7 +43,7 @@ class UserChannelController extends Controller
     public function show(String $id)
     {
         // return a channel by id
-
+        return $id;
         $channel = Channel::where('id', $id)->with('messages')->first();
         return $channel;
         

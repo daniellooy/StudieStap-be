@@ -30,13 +30,14 @@ Route::middleware('auth:sanctum')->get('/users',[UserController::class, 'show'])
 Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
 Route::middleware('auth:sanctum')->get('/channels',[UserChannelController::class, 'show']);
 // route for getting a channel
+Route::middleware('auth:sanctum')->get('/channel/{id}',[ChannelController::class, 'show']);
 Route::middleware('auth:sanctum')->get('/channel/{id}/messages',[MessageController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/channel/messages',[MessageController::class, 'create']);
 
 // routes for creating, editing and deleting a channel
 Route::middleware('auth:sanctum')->get('/channel',[ChannelController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/channel/add',[ChannelController::class, 'create']);
-Route::middleware('auth:sanctum')->get('/channel/{id}',[ChannelController::class, 'edit']);
+Route::middleware('auth:sanctum')->get('/channel/{id}/edit',[ChannelController::class, 'edit']);
 Route::middleware('auth:sanctum')->put('/channel/update',[ChannelController::class, 'update']);
 Route::middleware('auth:sanctum')->delete('/channel/delete',[ChannelController::class, 'destroy']);
 
