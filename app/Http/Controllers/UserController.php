@@ -11,18 +11,22 @@ class UserController extends Controller
     /**
      * Show the profile for a given user.
      */
-    public function show(string $id)
+    public function index(string $id)
     {
         $user = User::findOrFail($id);
         return $user;
         
+    }
+    public function show()
+    {
+        $users = User::all();
+        return $users;
     }
     /**
      * Update the profile for a given user.
      */
     public function update(Request $request)
     {
-
         $user = User::findOrFail($request->id);
         $profile_image = $request->file('profile_image_file'); 
         return $profile_image;
