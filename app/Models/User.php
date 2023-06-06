@@ -50,4 +50,8 @@ class User extends Authenticatable
     ];
 
 
+    public function evaluations(){
+        return $this->hasMany(ProgressEvaluation::class)->with('scores');
+    }
+
 }

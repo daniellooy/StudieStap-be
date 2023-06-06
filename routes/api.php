@@ -54,7 +54,21 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::delete("/video/delete", [\App\Http\Controllers\VideoController::class, 'deleteVideo']);
     Route::post("/completevideo", [\App\Http\Controllers\UserCompletedVideoController::class, 'completeVideo']);
     Route::post("/answerquestion", [\App\Http\Controllers\UserAnswersController::class, 'answerquestion']);
+    Route::get('/userevaluations', [\App\Http\Controllers\ProgressEvaluationsController::class, 'userEvaluationData']);
+    Route::get('/rubrics', [\App\Http\Controllers\ProgressRubricController::class, 'index']);
+    Route::get('/rubrics/{id}', [\App\Http\Controllers\ProgressRubricController::class, 'show']);
+    Route::delete('/rubrics/delete', [\App\Http\Controllers\ProgressRubricController::class, 'delete']);
+    Route::post('/rubrics/add', [\App\Http\Controllers\ProgressRubricController::class, 'add']);
+    Route::put('/rubrics/edit', [\App\Http\Controllers\ProgressRubricController::class, 'edit']);
+    Route::get('/evaluations', [\App\Http\Controllers\ProgressEvaluationsController::class, 'index']);
+    Route::get('/evaluations/{id}', [\App\Http\Controllers\ProgressEvaluationsController::class, 'show']);
+    Route::delete('/evaluations/delete', [\App\Http\Controllers\ProgressEvaluationsController::class, 'delete']);
+    Route::post('/evaluations/add', [\App\Http\Controllers\ProgressEvaluationsController::class, 'add']);
+    Route::put('/evaluations/edit', [\App\Http\Controllers\ProgressEvaluationsController::class, 'edit']);
+    Route::get('/users', [\App\Http\Controllers\UserController::class, 'index']);
 });
+
+
 
 
 // route for updating the users information

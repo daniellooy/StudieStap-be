@@ -31,6 +31,9 @@ class DatabaseSeeder extends Seeder
             AchievementSeeder::class,
             SubSeeder::class,
             UserCompletedVideosSeeder::class,
+            ProgressRubricSeeder::class,
+            ProgressEvaluationSeeder::class,
+            ProgressScoreSeeder::class,
         ]);
         $image = FileFacade::files(public_path('images'));
 

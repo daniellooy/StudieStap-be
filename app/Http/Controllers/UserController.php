@@ -17,6 +17,10 @@ class UserController extends Controller
         return $user;
 
     }
+
+    public function index(){
+        return User::all();
+    }
     /**
      * Update the profile for a given user.
      */
