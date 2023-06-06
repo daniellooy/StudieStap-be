@@ -1,11 +1,11 @@
 <?php
- 
+
 namespace App\Http\Controllers;
- 
+
 use App\Models\User;
 use Illuminate\Http\Request;
-    
- 
+
+
 class UserController extends Controller
 {
     /**
@@ -15,7 +15,11 @@ class UserController extends Controller
     {
         $user = User::findOrFail($id);
         return $user;
-        
+
+    }
+
+    public function index(){
+        return User::all();
     }
     public function show()
     {
@@ -28,11 +32,12 @@ class UserController extends Controller
     public function update(Request $request)
     {
         $user = User::findOrFail($request->id);
-        $profile_image = $request->file('profile_image_file'); 
-        return $profile_image;
-        
+
+        $profile_image = $request->file('profile_image_file');
+        $file = null;
+
         if(!empty($profile_image)){
-            $filename = $request->file('profile_image_file')->getClientOriginalName(); 
+            $filename = $request->file('profile_image_file')->getClientOriginalName();
             $file = $request->file('profile_image_file')->storeAs('images', $filename);
             $user->image = $file;
             $user->save();
@@ -53,7 +58,7 @@ class UserController extends Controller
         ]);
         $user->save();
         // update the fields of the users that are different from the request
-        
+
         return $user;
     }
 }

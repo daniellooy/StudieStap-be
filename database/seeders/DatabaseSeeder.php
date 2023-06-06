@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\UserCompletedVideos;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\File as FileFacade;
 use App\Models\Channel;
@@ -32,6 +34,14 @@ class DatabaseSeeder extends Seeder
             SubSeeder::class,
             ModuleSeeder::class,
             ShopItemSeeder::class,
+            VideoSeeder::class,
+            ModuleSeeder::class,
+            AchievementSeeder::class,
+            SubSeeder::class,
+            UserCompletedVideosSeeder::class,
+            ProgressRubricSeeder::class,
+            ProgressEvaluationSeeder::class,
+            ProgressScoreSeeder::class,
         ]);
         // make channels
         $image = ['images/Alpha-Symbol.png', 'images/Beta-Symbol.jpg'];

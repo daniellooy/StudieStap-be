@@ -11,13 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('modules', function (Blueprint $table) {
+        Schema::create('user_completed_videos', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
-            $table->string('description');
-            $table->string('thumbnail');
-            $table->unsignedBigInteger('learningcategory_id');
-            $table->foreign('learningcategory_id')->on('learningcategory')->references('id')->onDelete('cascade');
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->on('users')->references('id');
+            $table->unsignedBigInteger('video_id');
+            $table->foreign('video_id')->on('videos')->references('id');
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('modules');
+        Schema::dropIfExists('user_completed_videos');
     }
 };
