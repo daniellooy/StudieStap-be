@@ -22,17 +22,25 @@ class MessageController extends Controller
      */
     public function create(Request $request)
     {
-    
+       
         $userChannels = auth()->user()->channels;
         // rfind the channel that the request is trying to post in
         $userChannel = $userChannels->where('channel_id',$request->channel_id)->first();
         $uploadedFiles = $request->appendix_files;
-        $message = new Message([
-            'message' => $request->message,
-            'user_id' => auth()->user()->id,
-            'response_to_id' => $request->response_to_id,
-            'channel_id' => $userChannel->channel_id,
-        ]);
+        if($request->response_to_id === 'null'  ){
+            $message = new Message([
+                'message' => $request->message,
+                'user_id' => auth()->user()->id,
+                'channel_id' => $userChannel->channel_id,
+            ]);
+        }else{
+            $message = new Message([
+                'message' => $request->message,
+                'user_id' => auth()->user()->id,
+                'response_to_id' =>  $request->response_to_id,
+                'channel_id' => $userChannel->channel_id,
+            ]);
+        }
         $message->save();
         if(!empty($uploadedFiles)){
             foreach ($uploadedFiles as $file){
