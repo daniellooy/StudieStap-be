@@ -15,7 +15,11 @@ class Channel extends Model
         'description',
     ];
 
+<<<<<<< HEAD
     public function users() {
+=======
+    public function user() {
+>>>>>>> Daniel
         return $this->hasMany(UserChannel::class);
     }
 

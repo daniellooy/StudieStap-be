@@ -5,24 +5,20 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class UserChannel extends Model
+class SubsDone extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
+
     protected $fillable = [
+        'status',
         'user_id',
-        'channel_id',
     ];
-
-=======
->>>>>>> Daniel
-
-    public function channel() {
-        return $this->belongsTo(Channel::class);
-    }
 
     public function user() {
         return $this->belongsTo(User::class);
     }
 
+    public function sub() {
+        return $this->belongsTo(Sub::class)->with("achievement");
+    }
 }

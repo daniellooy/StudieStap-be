@@ -5,12 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class achievements extends Model
+class ShopItem extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'description',
+
     ];
+
+    public function purchases() {
+        return $this->hasMany(ShopItemPurchase::class);
+    }
 }
