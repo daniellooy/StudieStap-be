@@ -13,10 +13,7 @@ class Message extends Model
         'message',
         "channel_id",
         "user_id",
-<<<<<<< HEAD
         "response_to_id",
-=======
->>>>>>> Daniel
     ];
 
     public function channel() {
@@ -26,16 +23,10 @@ class Message extends Model
         return $this->belongsTo(User::class);
     }
 
-<<<<<<< HEAD
     public function appendix() {
         return $this->hasMany(MessageAppendix::class);
     }
     public function responseTo() {
         return $this->belongsTo(Message::class);
     }
-=======
-    public function appendix(): HasMany {
-        return $this->hasMany(MessageAppendix::class);
-    }
->>>>>>> Daniel
 }

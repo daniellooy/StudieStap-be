@@ -8,14 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class UserChannel extends Model
 {
     use HasFactory;
-<<<<<<< HEAD
     protected $fillable = [
         'user_id',
         'channel_id',
     ];
 
-=======
->>>>>>> Daniel
 
     public function channel() {
         return $this->belongsTo(Channel::class);
