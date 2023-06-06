@@ -24,16 +24,23 @@ class ChannelController extends Controller
      */
     public function create(Request $request)
     {
-        $fileName = $request->file('image_file')->getClientOriginalName();
         $file = $request->file('image_file');
         if (!empty($file)) {
+            $fileName = $request->file('image_file')->getClientOriginalName();
             $path = $file->storeAs('images', $fileName);
+            $channel = new Channel([
+                'name' => $request->name,
+                'description' => $request->description,
+                'image_path' => $path,
+            ]);
         }
-        $channel = new Channel([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image_path' => $path,
-        ]);
+        else {
+            $channel = new Channel([
+                'name' => $request->name,
+                'description' => $request->description,
+                // 'image_path' => $request->catApi,
+            ]);
+        }
         $channel->save();
 
         return response(['status' => 'succes'], 200);
@@ -79,7 +86,7 @@ class ChannelController extends Controller
         $channel->name = $request->name;
         $channel->description = $request->description;
         $file = $request->file('image_file');
-
+        
         $channelUsers = $channel->users()->get();
         $selectedUsers = explode(",", $request->users);
         // check if selectedUser is empty
@@ -97,7 +104,6 @@ class ChannelController extends Controller
         $collectie->each->delete();
 
 
-        return $channel->users()->get();
 
         if (!empty($file)) {
             $path = $file->storeAs('images', $file->getClientOriginalName());
