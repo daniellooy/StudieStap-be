@@ -86,7 +86,4 @@ Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']
 Route::get("/test", function(){
     return "Test";
 });
-
-Route::get('/achievements', [AchievementsController::class, 'index']);
-Route::get('/subs', [SubsController::class, 'index']);
 Route::delete("/video/delete", [\App\Http\Controllers\VideoController::class, 'deleteVideo']);
