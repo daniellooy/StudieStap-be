@@ -33,13 +33,35 @@ class ChannelController extends Controller
                 'description' => $request->description,
                 'image_path' => $path,
             ]);
-        }
-        else {
+            $channel->save();
+            $selectedUsers = explode(",", $request->users);
+            foreach ($selectedUsers as $user) {
+                if (!($user == '')) {
+                    $userChannel = UserChannel::firstOrCreate([
+                        'user_id' => $user,
+                        'channel_id' => $channel->id,
+                    ]);
+                    $userChannel->save();
+                }
+            }
+        } else {
             $channel = new Channel([
                 'name' => $request->name,
                 'description' => $request->description,
                 // 'image_path' => $request->catApi,
             ]);
+            $channel->save();
+            $selectedUsers = explode(",", $request->users);
+            // check if selectedUser is empty
+            foreach ($selectedUsers as $user) {
+                if (!($user == '')) {
+                    $userChannel = UserChannel::firstOrCreate([
+                        'user_id' => $user,
+                        'channel_id' => $channel->id,
+                    ]);
+                    $userChannel->save();
+                }
+            }
         }
         $channel->save();
 
@@ -86,19 +108,19 @@ class ChannelController extends Controller
         $channel->name = $request->name;
         $channel->description = $request->description;
         $file = $request->file('image_file');
-        
+
         $channelUsers = $channel->users()->get();
         $selectedUsers = explode(",", $request->users);
         // check if selectedUser is empty
-            foreach ($selectedUsers as $user) {
-              if(!($user == '')){
-                  $userChannel = UserChannel::firstOrCreate([
-                      'user_id' => $user,
-                      'channel_id' => $channel->id,
-                    ]);
-                    $userChannel->save();
-                }
+        foreach ($selectedUsers as $user) {
+            if (!($user == '')) {
+                $userChannel = UserChannel::firstOrCreate([
+                    'user_id' => $user,
+                    'channel_id' => $channel->id,
+                ]);
+                $userChannel->save();
             }
+        }
         $deleteUsers = $channelUsers->whereNotIn("user_id", $selectedUsers)->all();
         $collectie = new Collection($deleteUsers);
         $collectie->each->delete();
