@@ -110,7 +110,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::delete('/evaluations/delete', [\App\Http\Controllers\ProgressEvaluationsController::class, 'delete']);
     Route::post('/evaluations/add', [\App\Http\Controllers\ProgressEvaluationsController::class, 'add']);
     Route::put('/evaluations/edit', [\App\Http\Controllers\ProgressEvaluationsController::class, 'edit']);
-    Route::get('/users', [\App\Http\Controllers\UserController::class, 'index']);
+    Route::get('/users', [\App\Http\Controllers\UserController::class, 'show']);
 });
 
 
