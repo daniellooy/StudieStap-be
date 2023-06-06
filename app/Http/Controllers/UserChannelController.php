@@ -2,7 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User_Channel;
+use App\Models\UserChannel;
+use App\Models\Channel;
 use Illuminate\Http\Request;
 
 class UserChannelController extends Controller
@@ -13,6 +14,11 @@ class UserChannelController extends Controller
     public function index()
     {
         //
+        $channels = auth()->user()->channels;
+        foreach($channels as $channel){
+            $channel->channel;
+        }
+        return $channels;
     }
 
     /**
@@ -34,15 +40,18 @@ class UserChannelController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User_Channel $user_Channel)
+    public function show(String $id)
     {
-        //
+        // return a channel by id
+        $channel = Channel::where('id', $id)->with('messages')->first();
+        return $channel;
+        
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User_Channel $user_Channel)
+    public function edit(UserChannel $userChannel)
     {
         //
     }
@@ -50,7 +59,7 @@ class UserChannelController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User_Channel $user_Channel)
+    public function update(Request $request, UserChannel $userChannel)
     {
         //
     }
@@ -58,7 +67,7 @@ class UserChannelController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User_Channel $user_Channel)
+    public function destroy(UserChannel $userChannel)
     {
         //
     }

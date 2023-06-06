@@ -1,8 +1,16 @@
 <?php
 
+use App\Http\Controllers\ShopItemController;
+use App\Http\Controllers\ShopItemPurchaseController;
+use App\Http\Controllers\SubsDoneController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AchievementsController;
+use App\Http\Controllers\ChannelController;
+use App\Http\Controllers\UserChannelController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\SubsController;
+use App\Http\Controllers\AchievementController;
+use App\Http\Controllers\SubController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +26,46 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// All these routes need authentication
+Route::middleware('auth:sanctum')->group(function() {
+    Route::get('/user', fn(Request $req) => $req->user());
+    // route for updating the users information
+    Route::put('/user',[UserController::class, 'update']);
+
+    Route::get('/achievements', [AchievementController::class, 'index']);
+    Route::post('/achievements', [AchievementController::class, 'store']);
+    Route::post('/achievements/{achievement}/subs', [SubController::class, 'store']);
+
+    Route::get('/subs', [SubController::class, 'index']);
+
+    Route::post('/subs/{sub}/request', [SubsDoneController::class, 'store']);
+    Route::post('/subs/requests/{subsDone}/status', [SubsDoneController::class, 'update']);
+
+    Route::get('/shopitems', [ShopItemController::class, 'index']);
+    Route::post('/shopitems', [ShopItemController::class, 'store']);
+
+    Route::get('/subsdone', [SubsDoneController::class, 'index']);
+
+    Route::post('/shopitems/{shopitem}/purchase', [ShopItemPurchaseController::class, 'store']);
+
 });
+// get all the users
+Route::middleware('auth:sanctum')->get('/users',[UserController::class, 'show']);
+// route for updating the users information
+Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
+Route::middleware('auth:sanctum')->get('/channels',[ChannelController::class, 'index']);
+Route::middleware('auth:sanctum')->get('/channels/{id}',[UserChannelController::class, 'show']);
+// route for getting a channel
+Route::middleware('auth:sanctum')->get('/channel/{id}',[ChannelController::class, 'show']);
+Route::middleware('auth:sanctum')->get('/channel/{id}/messages',[MessageController::class, 'index']);
+Route::middleware('auth:sanctum')->post('/channel/messages',[MessageController::class, 'create']);
+
+// routes for creating, editing and deleting a channel
+Route::middleware('auth:sanctum')->get('/channel',[ChannelController::class, 'index']);
+Route::middleware('auth:sanctum')->post('/channel/add',[ChannelController::class, 'create']);
+Route::middleware('auth:sanctum')->get('/channel/{id}/edit',[ChannelController::class, 'edit']);
+Route::middleware('auth:sanctum')->put('/channel/update',[ChannelController::class, 'update']);
+Route::middleware('auth:sanctum')->delete('/channel/delete',[ChannelController::class, 'destroy']);
 
 
 // route for updating the users information
@@ -74,10 +119,7 @@ Route::middleware('auth:sanctum')->group(function() {
 // route for updating the users information
 Route::middleware('auth:sanctum')->put('/user',[UserController::class, 'update']);
 
-
 Route::get("/test", function(){
     return "Test";
 });
-
-Route::get('/achievements', [AchievementsController::class, 'index']);
-Route::get('/subs', [SubsController::class, 'index']);
+Route::delete("/video/delete", [\App\Http\Controllers\VideoController::class, 'deleteVideo']);
