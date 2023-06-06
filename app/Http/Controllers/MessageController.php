@@ -22,18 +22,18 @@ class MessageController extends Controller
      */
     public function create(Request $request)
     {
-       
+
         $userChannels = auth()->user()->channels;
         // rfind the channel that the request is trying to post in
-        $userChannel = $userChannels->where('channel_id',$request->channel_id)->first();
+        $userChannel = $userChannels->where('channel_id', $request->channel_id)->first();
         $uploadedFiles = $request->appendix_files;
-        if($request->response_to_id === 'null'  ){
+        if ($request->response_to_id === 'null') {
             $message = new Message([
                 'message' => $request->message,
                 'user_id' => auth()->user()->id,
                 'channel_id' => $userChannel->channel_id,
             ]);
-        }else{
+        } else {
             $message = new Message([
                 'message' => $request->message,
                 'user_id' => auth()->user()->id,
@@ -42,12 +42,20 @@ class MessageController extends Controller
             ]);
         }
         $message->save();
-        if(!empty($uploadedFiles)){
-            foreach ($uploadedFiles as $file){
-                $filename = $file->getClientOriginalName(); 
-                $file->storeAs('files', $filename);
+        // check extension
+        if (!empty($uploadedFiles)) {
+            foreach ($uploadedFiles as $file) {
+                $filename = $file->getClientOriginalName();
+                
                 $fileType = $file->extension();
-                $path = "files/" . $filename;
+                if($fileType === 'mp4'){
+                    $file->storeAs('videos', $filename);
+                    $path = "videos/" . $filename;
+                }
+                if(in_array($fileType, ['png', 'jpeg', 'jpg'])){
+                    $file->storeAs('images', $filename);
+                    $path = "images/" . $filename;
+                };
                 $appendix = new MessageAppendix([
                     'message_id' => $message->id,
                     'appendix_type' => $fileType,
@@ -56,7 +64,7 @@ class MessageController extends Controller
                 $appendix->save();
             }
         }
-        return response(['status'=>'succes'], 200);
+        return response(['status' => 'succes'], 200);
     }
 
     /**
@@ -64,8 +72,6 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-   
-
     }
 
     /**

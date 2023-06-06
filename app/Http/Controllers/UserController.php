@@ -40,7 +40,6 @@ class UserController extends Controller
             $user->save();
         }
 
-
         $user->update([
             'firstname' => $request->first_name,
             'lastname' => $request->last_name,
