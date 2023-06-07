@@ -104,6 +104,9 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/users', [\App\Http\Controllers\UserController::class, 'show']);
     Route::get('/funfact', [\App\Http\Controllers\FunFactController::class, 'index']);
     Route::put('/funfact/edit', [\App\Http\Controllers\FunFactController::class, 'edit']);
+    Route::get('/featuredmodule', [\App\Http\Controllers\FeaturedModuleController::class, 'index']);
+    Route::put('/featuredmodule/edit', [\App\Http\Controllers\FeaturedModuleController::class, 'edit']);
+    Route::get('/dashboard', [\App\Http\Controllers\DashboardController::class, 'index']);
 });
 
 
