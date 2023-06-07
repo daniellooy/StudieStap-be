@@ -102,6 +102,8 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::post('/evaluations/add', [\App\Http\Controllers\ProgressEvaluationsController::class, 'add']);
     Route::put('/evaluations/edit', [\App\Http\Controllers\ProgressEvaluationsController::class, 'edit']);
     Route::get('/users', [\App\Http\Controllers\UserController::class, 'show']);
+    Route::get('/funfact', [\App\Http\Controllers\FunFactController::class, 'index']);
+    Route::put('/funfact/edit', [\App\Http\Controllers\FunFactController::class, 'edit']);
 });
 
 
