@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             ProgressEvaluationSeeder::class,
             ProgressScoreSeeder::class,
             FunFactSeeder::class,
+            FeaturedModuleSeeder::class,
         ]);
         // make channels
         $image = ['images/Alpha-Symbol.png', 'images/Beta-Symbol.jpg'];
