@@ -35,13 +35,11 @@ class DatabaseSeeder extends Seeder
             ModuleSeeder::class,
             ShopItemSeeder::class,
             VideoSeeder::class,
-            ModuleSeeder::class,
-            AchievementSeeder::class,
-            SubSeeder::class,
             UserCompletedVideosSeeder::class,
             ProgressRubricSeeder::class,
             ProgressEvaluationSeeder::class,
             ProgressScoreSeeder::class,
+            FunFactSeeder::class,
         ]);
         // make channels
         $image = ['images/Alpha-Symbol.png', 'images/Beta-Symbol.jpg'];
