@@ -67,15 +67,6 @@ Route::middleware('auth:sanctum')->get('/channel/{id}/edit',[ChannelController::
 Route::middleware('auth:sanctum')->put('/channel/update',[ChannelController::class, 'update']);
 Route::middleware('auth:sanctum')->delete('/channel/delete',[ChannelController::class, 'destroy']);
 
-
-// route for updating the users information
-Route::put('/user',[UserController::class, 'update']);
-Route::middleware('auth:sanctum')->get('/channels',[UserChannelController::class, 'index']);
-// route for getting a channel
-Route::middleware('auth:sanctum')->get('/channel/{id}',[UserChannelController::class, 'show']);
-Route::middleware('auth:sanctum')->get('/channel/{id}/messages',[MessageController::class, 'index']);
-Route::middleware('auth:sanctum')->post('/channel/{id}/messages',[MessageController::class, 'create']);
-
 Route::middleware('auth:sanctum')->group(function() {
     Route::get("/modules", [\App\Http\Controllers\ModuleController::class, 'index']);
     Route::get("/categories", [\App\Http\Controllers\LearningCategoryController::class, 'index']);
@@ -110,7 +101,7 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::delete('/evaluations/delete', [\App\Http\Controllers\ProgressEvaluationsController::class, 'delete']);
     Route::post('/evaluations/add', [\App\Http\Controllers\ProgressEvaluationsController::class, 'add']);
     Route::put('/evaluations/edit', [\App\Http\Controllers\ProgressEvaluationsController::class, 'edit']);
-    Route::get('/users', [\App\Http\Controllers\UserController::class, 'index']);
+    Route::get('/users', [\App\Http\Controllers\UserController::class, 'show']);
 });
 
 

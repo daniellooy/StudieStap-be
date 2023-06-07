@@ -18,9 +18,6 @@ class UserController extends Controller
 
     }
 
-    public function index(){
-        return User::all();
-    }
     public function show()
     {
         $users = User::all();
@@ -42,7 +39,6 @@ class UserController extends Controller
             $user->image = $file;
             $user->save();
         }
-
 
         $user->update([
             'firstname' => $request->first_name,
