@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('shop_item_purchases', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->text("comment");
             $table->foreignIdFor(User::class)->constrained();
             $table->foreignIdFor(ShopItem::class)->constrained();
         });
