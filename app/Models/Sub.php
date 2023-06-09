@@ -10,7 +10,7 @@ class Sub extends Model
     use HasFactory;
 
     protected $fillable = [
-        
+        "amount", "points", "rang", "achievement_id"
     ];
 
     public function done() {
