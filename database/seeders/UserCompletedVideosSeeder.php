@@ -13,14 +13,6 @@ class UserCompletedVideosSeeder extends Seeder
      */
     public function run(): void
     {
-        DB::table('user_completed_videos')->insert([
-            'user_id' => 1,
-            'video_id' => 1,
-        ]);
 
-        DB::table('user_completed_videos')->insert([
-            'user_id' => 2,
-            'video_id' => 1,
-        ]);
     }
 }
