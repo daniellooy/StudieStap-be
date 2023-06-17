@@ -20,7 +20,7 @@ class UserFactory extends Factory
         return [
             'firstname' => fake()->name(),
             'lastname' => fake()->name(),
-            'date_of_birth' => now(),
+            'date_of_birth' => fake()->date('d-m-Y', 'now'),
             'email' => fake()->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => bcrypt('password'), // password
