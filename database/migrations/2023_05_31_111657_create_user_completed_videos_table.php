@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('user_completed_videos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->on('users')->references('id');
+            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
             $table->unsignedBigInteger('video_id');
-            $table->foreign('video_id')->on('videos')->references('id');
+            $table->foreign('video_id')->on('videos')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }
