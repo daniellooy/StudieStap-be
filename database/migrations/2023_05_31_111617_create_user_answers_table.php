@@ -14,11 +14,11 @@ return new class extends Migration
         Schema::create('user_answers', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->on('users')->references('id');
+            $table->foreign('user_id')->on('users')->references('id')->onDelete('cascade');
             $table->unsignedBigInteger('question_id');
-            $table->foreign('question_id')->on('questions')->references('id');
+            $table->foreign('question_id')->on('questions')->references('id')->onDelete('cascade');
             $table->unsignedBigInteger('answer_id');
-            $table->foreign('answer_id')->on('question_answers')->references('id');
+            $table->foreign('answer_id')->on('question_answers')->references('id')->onDelete('cascade');
             $table->timestamps();
         });
     }
